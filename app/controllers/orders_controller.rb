@@ -47,8 +47,8 @@ class OrdersController < ApplicationController
       quantity = entry[:quantity]
       order.line_items.new(
         product: product,
-        quantity: quantity,
-        item_price: product.price,
+        quantity: quantity ,
+        item_price:  product.price,
         total_price: product.price * quantity
       )
     end
