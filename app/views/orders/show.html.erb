@@ -7,7 +7,40 @@
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
   </div>
+      <h1>Order details</h1>
+     <div class="panel panel-default items">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th colspan="2">Product</th>
+          <th>Unit Price</th>
+          <th>Quantity</th>
+          <th> Price</th>
+        </tr>
+      </thead>
+      <tbody >
+        <% @order.line_items.each do |item| %>
+          <%  puts item.inspect %>
+          <%= render 'carts/item', product: item.get_product, quantity: item[:quantity].to_i %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="4">
+            Your order total:
+          </th>
+          <th>
+            <%= humanized_money_with_symbol @order.total %><h3>
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+        <h3>Your order total: <%= humanized_money_with_symbol @order.total %><h3>
+        <h4>A confirmation email will be sent to you at: <u><%= @order.email%><u><h4>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
+
 
 </section>
